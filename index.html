@@ -290,16 +290,82 @@
       </section>
 
       <!-- ==========================================
-           SCENE 6: FINAL COUPLE SCENE & CINEMATIC ENDING
+           SCENE 6: PHOTO STORY CAROUSEL & FINALE
            ========================================== -->
       <section id="scene-final" class="scene story-scene">
         <div class="paper-invitation-card shadow-luxury final-card-wrapper">
           <div class="card-gold-border"></div>
           <div class="card-inner-frame final-content">
             
-            <div class="couple-art-frame">
-              <img src="/couple_illustration.png" alt="Promoth & Sheeba Illustration" class="couple-art-img" />
-              <div class="art-light-glow"></div>
+            <div class="story-carousel-header">
+              <span class="carousel-badge">OUR STORY IN MOMENTS</span>
+            </div>
+
+            <!-- INTERACTIVE PHOTO STORY CAROUSEL -->
+            <div class="story-carousel" id="story-carousel">
+              <div class="carousel-track-container">
+                <div class="carousel-track" id="carousel-track">
+                  
+                  <!-- Slide 1 -->
+                  <div class="carousel-slide active">
+                    <div class="slide-image-wrapper">
+                      <img src="/story_1.jpg" alt="A promise Begins" class="slide-img" />
+                      <div class="slide-gradient-overlay"></div>
+                    </div>
+                    <div class="slide-caption">A promise Begins</div>
+                  </div>
+
+                  <!-- Slide 2 -->
+                  <div class="carousel-slide">
+                    <div class="slide-image-wrapper">
+                      <img src="/story_2.png" alt="A precious promise" class="slide-img" />
+                      <div class="slide-gradient-overlay"></div>
+                    </div>
+                    <div class="slide-caption">A precious promise</div>
+                  </div>
+
+                  <!-- Slide 3 -->
+                  <div class="carousel-slide">
+                    <div class="slide-image-wrapper">
+                      <img src="/story_3.jpg" alt="Together in bloom" class="slide-img" />
+                      <div class="slide-gradient-overlay"></div>
+                    </div>
+                    <div class="slide-caption">Together in bloom</div>
+                  </div>
+
+                  <!-- Slide 4 -->
+                  <div class="carousel-slide">
+                    <div class="slide-image-wrapper">
+                      <img src="/story_4.jpg" alt="Side by side" class="slide-img" />
+                      <div class="slide-gradient-overlay"></div>
+                    </div>
+                    <div class="slide-caption">Side by side</div>
+                  </div>
+
+                  <!-- Slide 5 -->
+                  <div class="carousel-slide">
+                    <div class="slide-image-wrapper">
+                      <img src="/story_5.png" alt="Into forever" class="slide-img" />
+                      <div class="slide-gradient-overlay"></div>
+                    </div>
+                    <div class="slide-caption">Into forever</div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Navigation Controls -->
+              <button class="carousel-btn prev-btn" id="carousel-prev" aria-label="Previous Photo">‹</button>
+              <button class="carousel-btn next-btn" id="carousel-next" aria-label="Next Photo">›</button>
+
+              <!-- Pagination Dots -->
+              <div class="carousel-dots" id="carousel-dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+                <span class="dot" data-index="3"></span>
+                <span class="dot" data-index="4"></span>
+              </div>
             </div>
 
             <div class="final-names-block">

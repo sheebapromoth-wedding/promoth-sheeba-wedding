@@ -1253,7 +1253,7 @@ html, body {
 }
 
 /* ==========================================================================
-   SCENE 8: FINAL COUPLE SCENE
+   SCENE 6: PHOTO STORY CAROUSEL & FINALE
    ========================================================================== */
 
 .final-card-wrapper {
@@ -1261,29 +1261,153 @@ html, body {
   background: linear-gradient(180deg, #FDFBFE 0%, #F3EAFB 100%);
 }
 
-.couple-art-frame {
+.story-carousel-header {
+  margin-bottom: 8px;
+  margin-top: 4px;
+}
+
+.carousel-badge {
+  font-family: var(--font-heading);
+  font-size: clamp(0.7rem, 3vw, 0.78rem);
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--dusty-rose-dark);
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid var(--gold-primary);
+}
+
+.story-carousel {
   position: relative;
   width: 100%;
-  max-width: 280px;
-  max-height: 250px;
-  border-radius: 14px;
+  max-width: 330px;
+  margin: 6px 0 14px 0;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(109, 76, 135, 0.25);
-  margin-bottom: 16px;
+  box-shadow: 0 12px 30px rgba(109, 76, 135, 0.25);
+  border: 1.5px solid var(--gold-primary);
+  background: #140A1E;
 }
 
-.couple-art-img {
+.carousel-track-container {
   width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
+  height: 270px;
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
 }
 
-.art-light-glow {
+.carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.slide-image-wrapper {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 40%, rgba(248, 244, 252, 0.4) 100%);
+  width: 100%;
+  height: 100%;
+}
+
+.slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.slide-gradient-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.2) 60%, rgba(20, 10, 30, 0.85) 100%);
   pointer-events: none;
+}
+
+.slide-caption {
+  position: relative;
+  z-index: 5;
+  font-family: var(--font-heading);
+  font-size: clamp(0.75rem, 3.2vw, 0.85rem);
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #FFF5E1;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8), 0 0 10px rgba(212, 175, 55, 0.5);
+  padding: 10px 14px;
+  text-align: center;
+  width: 100%;
+  background: rgba(30, 15, 45, 0.7);
+  backdrop-filter: blur(4px);
+  border-top: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+/* Navigation Buttons */
+.carousel-btn {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(253, 251, 254, 0.88);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--gold-primary);
+  color: var(--dusty-rose-dark);
+  font-size: 1.3rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.carousel-btn:hover {
+  background: #FFFFFF;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn { left: 8px; }
+.next-btn { right: 8px; }
+
+/* Pagination Dots */
+.carousel-dots {
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 6px;
+}
+
+.carousel-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dots .dot.active {
+  width: 20px;
+  border-radius: 10px;
+  background: var(--gold-primary);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
 }
 
 .final-names-block {
