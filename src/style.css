@@ -668,14 +668,14 @@ html, body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 135px;
+  height: 100px;
   background-image: url('/lavender_floral_header.png');
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.6;
+  opacity: 0.55;
   mix-blend-mode: multiply;
   -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0) 100%);
   mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0) 100%);
@@ -690,13 +690,16 @@ html, body {
 .invite-header-subtitle {
   font-family: var(--font-sans);
   font-size: clamp(0.6rem, 2.8vw, 0.7rem);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 2.5px;
   color: var(--dusty-rose-dark);
-  margin-bottom: 20px;
+  margin-top: 48px;
+  margin-bottom: 16px;
   line-height: 1.5;
   width: 100%;
   overflow-wrap: break-word;
+  position: relative;
+  z-index: 2;
 }
 
 .calligraphy-names-container {
