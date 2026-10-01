@@ -845,6 +845,22 @@ html, body {
   margin: 0;
 }
 
+.date-th {
+  font-size: 0.42em;
+  vertical-align: super;
+  font-family: var(--font-heading);
+  letter-spacing: 0.5px;
+  margin-left: 2px;
+}
+
+.cal-th {
+  font-size: 0.55em;
+  vertical-align: super;
+  font-family: var(--font-sans);
+  line-height: 0;
+  margin-left: 1px;
+}
+
 .scratch-under-content .date-month {
   font-family: var(--font-heading);
   font-size: clamp(0.8rem, 3.2vw, 0.95rem);

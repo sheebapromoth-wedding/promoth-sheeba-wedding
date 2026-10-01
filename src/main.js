@@ -84,9 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // CALLIGRAPHY HANDWRITING REVEAL SEQUENCE
   // ==========================================
   function triggerCalligraphyReveal() {
-    // Reveal Bride Name: Sheeba Jones W
+    // Reveal Groom Name: Promoth B
     setTimeout(() => {
-      brideNameText.classList.add('written');
+      groomNameText.classList.add('written');
       particleEngine.spawnAmbientButterfly();
     }, 400);
 
@@ -95,9 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
       ampersandText.classList.add('written');
     }, 1400);
 
-    // Reveal Groom Name: Promoth B
+    // Reveal Bride Name: Sheeba Jones W
     setTimeout(() => {
-      groomNameText.classList.add('written');
+      brideNameText.classList.add('written');
       particleEngine.spawnAmbientButterfly();
     }, 2200);
   }
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // LIVE COUNTDOWN TIMER TO WEDDING
   // ==========================================
-  const weddingDate = new Date('October 29, 2026 14:30:00').getTime();
+  const weddingDate = new Date('October 29, 2026 18:00:00').getTime();
   const cdDays = document.getElementById('cd-days');
   const cdHours = document.getElementById('cd-hours');
   const cdMins = document.getElementById('cd-mins');
@@ -202,9 +202,9 @@ document.addEventListener('DOMContentLoaded', () => {
       audioEngine.playWaxCrackSound();
       particleEngine.burstEnvelopeButterflies();
 
-      const weddingScene = document.getElementById('scene-wedding');
-      if (weddingScene) {
-        weddingScene.scrollIntoView({ behavior: 'smooth' });
+      const receptionScene = document.getElementById('scene-reception');
+      if (receptionScene) {
+        receptionScene.scrollIntoView({ behavior: 'smooth' });
       }
     });
   }
