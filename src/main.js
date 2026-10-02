@@ -30,9 +30,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let isEnvelopeOpened = false;
 
+  // ==========================================
+  // PHOTO STORY CAROUSEL CONTROLLER
+  // ==========================================
+  const carouselTrack = document.getElementById('carousel-track');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+  const dotsContainer = document.getElementById('carousel-dots');
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
+
+  let currentSlideIndex = 0;
+  const totalSlides = slides.length;
+  let autoSlideTimer = null;
+
+  function updateCarousel(index) {
+    if (totalSlides === 0) return;
+    currentSlideIndex = (index + totalSlides) % totalSlides;
+
+    if (carouselTrack) {
+      carouselTrack.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+    }
+
+    slides.forEach((slide, idx) => {
+      if (idx === currentSlideIndex) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+
+    dots.forEach((dot, idx) => {
+      if (idx === currentSlideIndex) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  function stopAutoSlide() {
+    if (autoSlideTimer) {
+      clearInterval(autoSlideTimer);
+      autoSlideTimer = null;
+    }
+  }
+
+  function startAutoSlide() {
+    if (autoSlideTimer) return;
+    autoSlideTimer = setInterval(() => {
+      updateCarousel(currentSlideIndex + 1);
+    }, 4500);
+  }
+
+  // Lock carousel strictly to Slide 0 (A promise Begins) on load
+  updateCarousel(0);
+
   // Reset application to pristine opening screen & 1st photo slide on every load/open
   function resetApplicationState() {
     isEnvelopeOpened = false;
+    stopAutoSlide();
+    updateCarousel(0);
     
     if (sceneEnvelope) {
       sceneEnvelope.style.display = 'flex';
@@ -60,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
   resetApplicationState();
 
   // Music Button Click
-  musicControl.addEventListener('click', () => {
+  musicControl?.addEventListener('click', () => {
     const playing = audioEngine.toggleMusic();
     if (playing) {
       musicControl.classList.add('playing');
@@ -90,33 +148,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Start soft ambient music on interaction
     audioEngine.startAmbientMusic();
-    musicControl.classList.add('playing');
+    musicControl?.classList.add('playing');
 
     // 3. Add 3D CSS envelope opening animation state
-    envelope.classList.add('opening');
+    envelope?.classList.add('opening');
 
     // 4. Trigger butterfly explosion & gold dust
     particleEngine.burstEnvelopeButterflies();
 
     // 5. Cinematic zoom & smooth transition into story view
     setTimeout(() => {
-      storyContainer.classList.remove('hidden');
+      storyContainer?.classList.remove('hidden');
 
       // Fade out envelope backdrop
-      sceneEnvelope.style.opacity = '0';
-      sceneEnvelope.style.pointerEvents = 'none';
+      if (sceneEnvelope) {
+        sceneEnvelope.style.opacity = '0';
+        sceneEnvelope.style.pointerEvents = 'none';
+      }
 
       // Start Calligraphy Handwriting reveal sequence
       triggerCalligraphyReveal();
-      
-      // Ensure carousel starts cleanly on 1st slide: A promise Begins
-      if (typeof updateCarousel === 'function') {
-        updateCarousel(0);
-      }
+
+      // Lock carousel on slide 0
+      updateCarousel(0);
     }, 1400);
 
     setTimeout(() => {
-      sceneEnvelope.style.display = 'none';
+      if (sceneEnvelope) {
+        sceneEnvelope.style.display = 'none';
+      }
     }, 2600);
   }
 
@@ -126,18 +186,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function triggerCalligraphyReveal() {
     // Reveal Groom Name: Promoth B
     setTimeout(() => {
-      groomNameText.classList.add('written');
+      groomNameText?.classList.add('written');
       particleEngine.spawnAmbientButterfly();
     }, 400);
 
     // Reveal Ampersand: &
     setTimeout(() => {
-      ampersandText.classList.add('written');
+      ampersandText?.classList.add('written');
     }, 1400);
 
     // Reveal Bride Name: Sheeba Jones W
     setTimeout(() => {
-      brideNameText.classList.add('written');
+      brideNameText?.classList.add('written');
       particleEngine.spawnAmbientButterfly();
     }, 2200);
   }
@@ -249,72 +309,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ==========================================
-  // SCROLL-TRIGGERED FADE-IN & BUTTERFLY PASS
-  // ==========================================
-  const observerOptions = {
-    threshold: 0.25
-  };
-
-  const sceneObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('scene-visible');
-        particleEngine.spawnAmbientButterfly();
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.story-scene').forEach((scene) => {
-    sceneObserver.observe(scene);
+  // Carousel Buttons & Dots Handlers
+  prevBtn?.addEventListener('click', () => {
+    stopAutoSlide();
+    updateCarousel(currentSlideIndex - 1);
   });
 
-  // ==========================================
-  // PHOTO STORY CAROUSEL CONTROLLER
-  // ==========================================
-  const carouselTrack = document.getElementById('carousel-track');
-  const prevBtn = document.getElementById('carousel-prev');
-  const nextBtn = document.getElementById('carousel-next');
-  const dotsContainer = document.getElementById('carousel-dots');
-  const slides = document.querySelectorAll('.carousel-slide');
-  const dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
-
-  let currentSlideIndex = 0;
-  const totalSlides = slides.length;
-
-  function updateCarousel(index) {
-    if (totalSlides === 0) return;
-    currentSlideIndex = (index + totalSlides) % totalSlides;
-
-    if (carouselTrack) {
-      carouselTrack.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
-    }
-
-    slides.forEach((slide, idx) => {
-      if (idx === currentSlideIndex) {
-        slide.classList.add('active');
-      } else {
-        slide.classList.remove('active');
-      }
-    });
-
-    dots.forEach((dot, idx) => {
-      if (idx === currentSlideIndex) {
-        dot.classList.add('active');
-      } else {
-        dot.classList.remove('active');
-      }
-    });
-  }
-
-  // Ensure carousel always starts cleanly on Slide 0 (1st Photo)
-  updateCarousel(0);
-
-  prevBtn?.addEventListener('click', () => updateCarousel(currentSlideIndex - 1));
-  nextBtn?.addEventListener('click', () => updateCarousel(currentSlideIndex + 1));
+  nextBtn?.addEventListener('click', () => {
+    stopAutoSlide();
+    updateCarousel(currentSlideIndex + 1);
+  });
 
   dots.forEach((dot, idx) => {
-    dot.addEventListener('click', () => updateCarousel(idx));
+    dot.addEventListener('click', () => {
+      stopAutoSlide();
+      updateCarousel(idx);
+    });
   });
 
   // Touch Swipe Support for Mobile Devices
@@ -331,11 +341,14 @@ document.addEventListener('DOMContentLoaded', () => {
       touchEndX = e.changedTouches[0].screenX;
       handleSwipe();
     }, { passive: true });
+
+    carouselContainer.addEventListener('pointerenter', stopAutoSlide);
   }
 
   function handleSwipe() {
     const diffX = touchEndX - touchStartX;
     if (Math.abs(diffX) > 35) {
+      stopAutoSlide();
       if (diffX < 0) {
         updateCarousel(currentSlideIndex + 1);
       } else {
@@ -344,11 +357,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Auto-play slideshow every 4.5 seconds
-  let autoSlideTimer = setInterval(() => {
-    updateCarousel(currentSlideIndex + 1);
-  }, 4500);
+  // ==========================================
+  // SCROLL-TRIGGERED FADE-IN & BUTTERFLY PASS
+  // ==========================================
+  const observerOptions = {
+    threshold: 0.2
+  };
 
-  carouselContainer?.addEventListener('pointerenter', () => clearInterval(autoSlideTimer));
+  const sceneObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('scene-visible');
+        particleEngine.spawnAmbientButterfly();
+
+        // Start carousel autoplay only when viewer scrolls to final card
+        if (entry.target.id === 'scene-final') {
+          startAutoSlide();
+        }
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.story-scene').forEach((scene) => {
+    sceneObserver.observe(scene);
+  });
 
 });
