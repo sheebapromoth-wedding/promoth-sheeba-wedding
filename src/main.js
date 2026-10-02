@@ -22,7 +22,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const groomNameText = document.getElementById('groom-name-text');
   const calDay29 = document.getElementById('cal-day-29');
 
+  // Disable browser scroll restoration so page always opens fresh at the start
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+
   let isEnvelopeOpened = false;
+
+  // Reset application to pristine opening screen & 1st photo slide on every load/open
+  function resetApplicationState() {
+    isEnvelopeOpened = false;
+    
+    if (sceneEnvelope) {
+      sceneEnvelope.style.display = 'flex';
+      sceneEnvelope.style.opacity = '1';
+      sceneEnvelope.style.pointerEvents = 'auto';
+    }
+    if (envelope) {
+      envelope.classList.remove('opening');
+    }
+    if (storyContainer) {
+      storyContainer.classList.add('hidden');
+      storyContainer.scrollTop = 0;
+    }
+
+    // Reset Calligraphy text animations
+    groomNameText?.classList.remove('written');
+    ampersandText?.classList.remove('written');
+    brideNameText?.classList.remove('written');
+
+    // Scroll viewport to top
+    window.scrollTo(0, 0);
+  }
+
+  // Execute initial state reset on load
+  resetApplicationState();
 
   // Music Button Click
   musicControl.addEventListener('click', () => {
@@ -266,6 +301,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Ensure carousel always starts cleanly on Slide 0 (1st Photo)
+  updateCarousel(0);
 
   prevBtn?.addEventListener('click', () => updateCarousel(currentSlideIndex - 1));
   nextBtn?.addEventListener('click', () => updateCarousel(currentSlideIndex + 1));
