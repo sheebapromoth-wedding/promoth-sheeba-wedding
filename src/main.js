@@ -108,6 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Start Calligraphy Handwriting reveal sequence
       triggerCalligraphyReveal();
+      
+      // Ensure carousel starts cleanly on 1st slide: A promise Begins
+      if (typeof updateCarousel === 'function') {
+        updateCarousel(0);
+      }
     }, 1400);
 
     setTimeout(() => {
