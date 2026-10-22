@@ -1146,6 +1146,40 @@ html, body {
   overflow-wrap: break-word;
 }
 
+.date-big {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 16vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--lavender-deep);
+  background: var(--gold-text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.date-sup-th {
+  font-family: var(--font-heading);
+  font-size: clamp(0.7rem, 3vw, 0.9rem);
+  font-weight: 600;
+  vertical-align: super;
+  color: var(--dusty-rose-dark);
+  -webkit-text-fill-color: var(--dusty-rose-dark);
+  letter-spacing: 1px;
+  margin-left: 2px;
+}
+
+.date-rest {
+  font-family: var(--font-heading);
+  font-size: clamp(0.85rem, 3.5vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--dusty-rose-dark);
+  -webkit-text-fill-color: var(--dusty-rose-dark);
+  display: block;
+  margin-top: 4px;
+}
+
+
 .detail-sub {
   font-family: var(--font-sans);
   font-size: clamp(0.68rem, 3vw, 0.75rem);
