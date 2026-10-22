@@ -742,6 +742,14 @@ html, body {
   transform: translateY(0);
 }
 
+.bride-name {
+  white-space: nowrap;
+  font-size: clamp(1.6rem, 7vw, 3rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
 .calligraphy-ampersand {
   font-family: 'Playfair Display', serif;
   font-size: clamp(1.8rem, 6vw, 2.4rem);
@@ -1424,8 +1432,12 @@ html, body {
   justify-content: center;
   gap: 2px;
   font-family: 'Great Vibes', 'Alex Brush', cursive;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 1px;
   font-size: clamp(2.4rem, 10vw, 3.4rem);
   color: var(--lavender-deep);
+  line-height: 1.25;
   width: 100%;
   text-shadow: 0 2px 4px rgba(90, 64, 114, 0.12);
 }
