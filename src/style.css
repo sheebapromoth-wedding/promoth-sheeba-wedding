@@ -1434,8 +1434,8 @@ html, body {
   font-family: 'Great Vibes', 'Alex Brush', cursive;
   font-style: normal;
   font-weight: 400;
-  letter-spacing: 1px;
-  font-size: clamp(2.4rem, 10vw, 3.4rem);
+  letter-spacing: 2px;
+  font-size: clamp(3.2rem, 14vw, 5rem);
   color: var(--lavender-deep);
   line-height: 1.25;
   width: 100%;
